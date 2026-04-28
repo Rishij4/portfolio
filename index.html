@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jakkani Rishikesh | Portfolio</title>
+    <title>Jakkani Rishikesh | Full Stack MERN Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #1e293b; overflow-x: hidden; }
         
         #toast {
             visibility: hidden;
-            min-width: 250px;
+            min-width: 280px;
             background-color: #1e293b;
             color: #fff;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 16px;
             position: fixed;
             z-index: 100;
@@ -24,7 +24,7 @@
             transform: translateX(-50%);
             bottom: 30px;
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
         #toast.show {
             visibility: visible;
@@ -33,15 +33,16 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* Mobile Menu Transition */
         #mobile-menu {
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 0;
+            opacity: 0;
             overflow: hidden;
         }
         #mobile-menu.open {
-            max-height: 500px;
-            padding: 1rem 0;
+            max-height: 600px;
+            opacity: 1;
+            padding: 1.5rem 0;
         }
     </style>
 </head>
@@ -50,461 +51,436 @@
     <div id="toast">Email copied! Opening Gmail...</div>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 py-4 md:py-6">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="flex justify-between items-center">
-                <!-- Branding -->
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-500">
-                    <a href="#about" class="hover:text-blue-600 transition">About</a>
-                    <a href="#education" class="hover:text-blue-600 transition">Education</a>
-                    <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
-                    <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
-                    <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-600 focus:outline-none">
-                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
-                </button>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100 py-3 md:py-4">
+        <div class="max-w-4xl mx-auto px-5 flex justify-between items-center">
+            <div class="font-black text-2xl tracking-tighter text-blue-600">JR.</div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8 text-sm font-semibold text-gray-500">
+                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
+                <a href="#certifications" class="hover:text-blue-600 transition-colors">Certifications</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
             </div>
 
-            <!-- Mobile Navigation Drawer -->
-            <div id="mobile-menu" class="md:hidden flex flex-col space-y-4 text-sm font-medium text-gray-500">
-                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-blue-600 transition">About</a>
-                <a href="#education" onclick="toggleMobileMenu()" class="hover:text-blue-600 transition">Education</a>
-                <a href="#skills" onclick="toggleMobileMenu()" class="hover:text-blue-600 transition">Skills</a>
-                <a href="#projects" onclick="toggleMobileMenu()" class="hover:text-blue-600 transition">Projects</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-blue-600 transition">Contact</a>
-            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 focus:outline-none" aria-label="Toggle Menu">
+                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="md:hidden px-6 bg-white flex flex-col space-y-2 text-base font-medium text-gray-600">
+            <a href="#about" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">About</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Projects</a>
+            <a href="#certifications" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Certifications</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="py-3 hover:text-blue-600">Contact</a>
         </div>
     </nav>
+
     <!-- Header / Intro -->
-    <header id="home" class="py-24">
+    <header id="home" class="py-16 md:py-32 overflow-hidden">
         <div class="max-w-4xl mx-auto px-6">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">Jakkani Rishikesh</h1>
-            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                Electronics & Communication Engineer and Web Developer passionate about creating technology-driven solutions.
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight leading-[1.1]">Jakkani Rishikesh</h1>
+            
+            <div class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full mb-8 uppercase tracking-widest border border-blue-100">
+                Full Stack MERN Developer
+            </div>
+
+            <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl font-medium">
+                Passionate Full Stack Developer specialized in building scalable, user-centric web applications using the <span class="text-gray-900 font-bold">MERN stack</span> (MongoDB, Express, React, Node.js).
             </p>
             <div class="flex flex-wrap gap-4">
-                <button onclick="handleEmailClick()" class="bg-gray-900 text-white px-6 py-2.5 rounded text-sm font-medium hover:bg-gray-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-envelope"></i> Email Me
+                <button onclick="handleEmailClick()" class="flex-1 sm:flex-none bg-gray-900 text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-800 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-gray-200">
+                    <i class="fa-solid fa-envelope"></i> Hire Me
                 </button>
-                <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="border border-gray-200 text-gray-700 px-6 py-2.5 rounded text-sm font-medium hover:bg-gray-50 transition">
-                    LinkedIn
-                </a>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <a href="https://github.com/Rishij4" target="_blank" class="flex-1 sm:flex-none border border-gray-200 text-gray-700 px-6 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="flex-1 sm:flex-none border border-gray-200 text-gray-700 px-6 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-linkedin text-lg"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Objective / About -->
-    <section id="about" class="py-20 border-t border-gray-50">
+    <!-- Career Objective -->
+    <section id="about" class="py-16 md:py-24 border-t border-gray-50">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-4">Objective</h2>
-            <p class="text-lg text-gray-700 leading-relaxed max-w-3xl">
-                To build a strong career in technology and problem-solving by applying my skills in web development, 
-                artificial intelligence, and electronics to create effective and reliable solutions. 
-                I aim to learn continuously and contribute to the growth of a forward-thinking organization.
+            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-6">Career Objective</h2>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl font-medium">
+                Aspiring Full Stack Developer with a strong foundation in modern web architecture and problem-solving. Skilled in building responsive, full-featured web applications using the MERN stack. Seeking an entry-level role to contribute to innovative software solutions while continuously scaling my technical capabilities.
             </p>
         </div>
     </section>
 
-    <!-- Education -->
-    <section id="education" class="py-20 bg-gray-50">
+    <!-- Technical Skills Grid -->
+    <section id="skills" class="py-16 md:py-24 bg-gray-50/50">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-10">Education</h2>
-            <div class="space-y-10">
-                <div class="flex flex-col md:flex-row md:items-baseline justify-between border-b border-gray-200 pb-8 last:border-0">
-                    <div>
-                        <h3 class="font-bold text-gray-900 text-lg">B.Tech in Electronics and Communication Engineering</h3>
-                        <p class="text-gray-600">Sree Chaitanya College of Engineering</p>
-                    </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-sm font-bold text-gray-900">2021 — 2025</p>
-                        <p class="text-xs text-blue-600 font-semibold">CGPA: 6.5</p>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-baseline justify-between border-b border-gray-200 pb-8 last:border-0">
-                    <div>
-                        <h3 class="font-bold text-gray-900 text-lg">Intermediate (MPC)</h3>
-                        <p class="text-gray-600">Alphores Junior College</p>
-                    </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-sm font-bold text-gray-900">2019 — 2021</p>
-                        <p class="text-xs text-blue-600 font-semibold">Percentage: 65.00%</p>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-baseline justify-between">
-                    <div>
-                        <h3 class="font-bold text-gray-900 text-lg">Secondary School Certificate (SSC)</h3>
-                        <p class="text-gray-600">Siddhartha High School</p>
-                    </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-sm font-bold text-gray-900">2018 — 2019</p>
-                        <p class="text-xs text-blue-600 font-semibold">CGPA: 9.5</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Grid -->
-    <section id="skills" class="py-20">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-10">Technical Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="font-bold mb-4 text-gray-900">Web & Programming</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-center gap-3"><i class="fa-brands fa-python text-blue-500 w-5"></i> Python</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-code text-blue-500 w-5"></i> HTML, CSS, JavaScript, Bootstrap, Flexbox</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-database text-blue-500 w-5"></i> SQL & DBMS</li>
+            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12 text-center">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Frontend -->
+                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
+                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-blue-500"></i> Frontend
+                    </h3>
+                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
+                        <li class="flex justify-between items-center"><span>React.js</span> <i class="fa-brands fa-react text-blue-400 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Tailwind CSS</span> <i class="fa-solid fa-wind text-cyan-400 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>JavaScript (ES6+)</span> <i class="fa-brands fa-js text-yellow-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>HTML5 / CSS3</span> <i class="fa-brands fa-html5 text-orange-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Bootstrap</span> <i class="fa-brands fa-bootstrap text-purple-600 text-base"></i></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="font-bold mb-4 text-gray-900">Tools & Platforms</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-microchip text-blue-500 w-5"></i> Arduino IDE</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-eye text-blue-500 w-5"></i> OpenCV & AI</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-layer-group text-blue-500 w-5"></i> MATLAB & PCB Design</li>
+                <!-- Backend -->
+                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
+                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-server text-blue-500"></i> Backend & DB
+                    </h3>
+                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
+                        <li class="flex justify-between items-center"><span>Node.js</span> <i class="fa-brands fa-node-js text-green-600 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Express.js</span> <i class="fa-solid fa-bolt text-gray-800 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>MongoDB</span> <i class="fa-solid fa-leaf text-green-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>SQL / MySQL</span> <i class="fa-solid fa-database text-blue-600 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Python</span> <i class="fa-brands fa-python text-blue-400 text-base"></i></li>
+                    </ul>
+                </div>
+                <!-- Tools -->
+                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:col-span-2 md:col-span-1">
+                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> Tools & Others
+                    </h3>
+                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
+                        <li class="flex justify-between items-center"><span>Git / GitHub</span> <i class="fa-brands fa-github text-gray-900 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>VS Code</span> <i class="fa-solid fa-terminal text-blue-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Postman</span> <i class="fa-solid fa-envelope-open-text text-orange-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>OpenCV</span> <i class="fa-solid fa-eye text-green-500 text-base"></i></li>
+                        <li class="flex justify-between items-center"><span>Arduino IDE</span> <i class="fa-solid fa-microchip text-teal-500 text-base"></i></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience / Projects -->
-    <section id="projects" class="py-20 bg-gray-50">
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 md:py-24">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-10">Projects & Internship</h2>
+            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12">Projects</h2>
             
-            <div class="space-y-12">
-                <!-- Internship -->
-                <div class="p-8 bg-white border border-gray-100 rounded-xl hover:border-blue-200 transition group shadow-sm">
-                    <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4">
-                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600">Web Development Internship</h3>
-                        <span class="text-sm text-gray-500 font-medium">Nov 2024 — Jan 2025</span>
-                    </div>
-                    <p class="text-black mb-2 font-semibold">Genz educatingwing</p>
-                    <p class="text-gray-700 font-medium mb-3 italic">Successfully completed the development of the following projects:</p>
-                    <div class="space-y-2">
-                        <ol class="text-gray-600 leading-relaxed list-decimal ml-5">
-                            <li>Portfolio website Development</li>
-                            <li>Real estate listing platform Development</li>
-                        </ol>
-                    </div>
-                    <div class="mt-6 flex items-center gap-3">
-                        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Tools:</span>
+            <div class="space-y-8 md:space-y-12">
+                <!-- 1. AI-Based Ticketing System -->
+                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl hover:shadow-blue-500/5">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">AI-Based Ticketing System</h3>
+                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Built an intelligent system for automatic ticket classification.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented issue prioritization using logic-based automation.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Designed a simple interface for tracking and managing tickets.</li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
                         <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-500 rounded">HTML5</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded">CSS</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-yellow-50 text-yellow-700 rounded">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Processor Project -->
-                 <div class="p-8 bg-white border border-gray-100 rounded-xl hover:border-blue-200 transition group shadow-sm">
-                    <h4 class="font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition">Mobile Processor Hub</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                        A modern web application serving as a central hub for mobile processor data. Features a glassmorphism UI, search/filtering logic, and full responsive dark mode support.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-500 rounded">HTML5</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-yellow-50 text-yellow-700 rounded">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-8 bg-white border border-gray-100 rounded-xl hover:border-blue-200 transition group shadow-sm">
-                    <h4 class="font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition">Portfolio Website Development</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                        Developed a responsive portfolio website using HTML, CSS, Bootstrap, and Flexbox. Implemented responsive layouts and optimized design for different screen sizes.                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-500 rounded">HTML/CSS</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded">Bootstrap</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-yellow-50 text-yellow-700 rounded">Flexbox</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-green-50 text-green-700 rounded-lg border border-green-100">Node.js</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Express.js</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">Logic Automation</span>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- Projects -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="p-8 bg-white border border-gray-100 rounded-xl hover:border-blue-200 transition group shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition">Criminal Detection System</h4>
-                            <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                                Facial recognition application utilizing OpenCV for live identification and tracking of potential suspects.
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Tools:</span>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded">Python</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-500 rounded">OpenCV</span>
-                            </div>
+                <!-- 2. Mobile Processor Hub -->
+                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Mobile Processor Hub (Web Application)</h3>
+                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a responsive web application with dynamic search and filtering.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented modern UI using Tailwind CSS with dark mode support.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Enhanced user experience with efficient data handling.</li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">HTML5</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">JavaScript</span>
                         </div>
                     </div>
-                    <div class="p-8 bg-white border border-gray-100 rounded-xl hover:border-blue-200 transition group shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition">Robotic Bomb Detection</h4>
-                            <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                                An embedded hardware project using Arduino and specialized sensors for remote hazard identification.
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Tools:</span>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-500 rounded">Arduino IDE</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded">Embedded C</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-gray-100 text-gray-600 rounded">HTML</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 bg-yellow-50 text-yellow-600 rounded">JavaScript</span>
+                </div>
 
-                            </div>
+                <!-- 3. Facial Recognition System -->
+                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Facial Recognition System for Criminal Detection</h3>
+                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a real-time facial recognition system using Python and OpenCV.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented image preprocessing and feature extraction techniques.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Improved detection accuracy using optimized datasets.</li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Python</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">OpenCV</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">AI Logic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Robotic Bomb Detection System -->
+                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Robotic Bomb Detection System (IoT Project)</h3>
+                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a robotic system for detecting hazardous objects using sensors and microcontroller.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented control logic using Arduino for real-time monitoring and navigation.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Integrated hardware and software components for remote operation.</li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-teal-50 text-teal-700 rounded-lg border border-teal-100">Arduino</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">Sensors</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Embedded C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Portfolio Website -->
+                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
+                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Portfolio Website</h3>
+                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Designed and developed a fully responsive personal portfolio.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Optimized layout for mobile and desktop using Flexbox and Bootstrap.</li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented modern UI/UX principles for professional branding.</li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">HTML/CSS</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Bootstrap</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">Flexbox</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section id="experience" class="py-16 md:py-24 bg-gray-50/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Internship -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-8">Experience</h2>
+                    <div class="relative pl-8 border-l-2 border-blue-100">
+                        <div class="mb-10 relative">
+                            <div class="absolute -left-[41px] top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-white shadow-sm"></div>
+                            <h3 class="font-bold text-gray-900 text-lg">Web Development Intern</h3>
+                            <p class="text-sm text-blue-600 font-bold mb-1">Genz Educating Wing</p>
+                            <p class="text-[11px] text-gray-400 mb-4 font-bold uppercase tracking-wider">Nov 2024 — Jan 2025</p>
+                            <ul class="text-sm text-gray-600 space-y-3 font-medium">
+                                <li class="flex gap-2"><span class="text-blue-500">•</span> Developed responsive web applications including a portfolio and real estate platform.</li>
+                                <li class="flex gap-2"><span class="text-blue-500">•</span> Collaborated with team members in designing UI components.</li>
+                                <li class="flex gap-2"><span class="text-blue-500">•</span> Improved website performance and responsiveness.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-8">Education</h2>
+                    <div class="space-y-10">
+                        <div class="group">
+                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">B.Tech in ECE</h3>
+                            <p class="text-sm text-gray-600 font-medium">Sree Chaitanya College of Engineering</p>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2021 — 2025</span>
+                                <span class="text-[11px] font-bold text-gray-400">CGPA: 6.5</span>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Intermediate (MPC)</h3>
+                            <p class="text-sm text-gray-600 font-medium">Alphores Junior College</p>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2019 — 2021</span>
+                                <span class="text-[11px] font-bold text-gray-400">Percentage: 65%</span>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">SSC</h3>
+                            <p class="text-sm text-gray-600 font-medium">Siddhartha High School</p>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2018 — 2019</span>
+                                <span class="text-[11px] font-bold text-gray-400">CGPA: 9.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-20">
+    <section id="certifications" class="py-16 md:py-24">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-10">Certifications</h2>
+            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12 text-center">Certifications</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-laptop-code"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Node JS -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-brands fa-node-js"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Responsive Website</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Node.js Specialist</h4>
                     </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: Nov 18, 2025</p>
-                    <p class="text-sm text-gray-600">Technologies: Bootstrap, Flexbox</p>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: April 24, 2026</p>
+                    <p class="text-sm text-gray-500 font-medium">Node.js, Express, and Backend Development.</p>
                 </div>
 
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Static Website</h4>
-                    </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: Nov 4, 2025</p>
-                    <p class="text-sm text-gray-600">Technologies: HTML, CSS, Bootstrap</p>
-                </div>
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Introduction to Databases</h4>
-                    </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: Jan 11, 2026</p>
-                    <p class="text-sm text-gray-600">Technologies: SQL</p>
-                </div>
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Programming Foundations With Python</h4>
-                    </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: Feb 10, 2026</p>
-                    <p class="text-sm text-gray-600">Technologies: Python</p>
-                </div>
-
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
+                <!-- Dynamic Web Application -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
                             <i class="fa-solid fa-gears"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Dynamic Web Application</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Dynamic Web App</h4>
                     </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: March 13, 2026</p>
-                    <p class="text-sm text-gray-600">Technologies: JavaScript</p>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: March 13, 2026</p>
+                    <p class="text-sm text-gray-500 font-medium">JavaScript Essentials and DOM Manipulation.</p>
                 </div>
 
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
+                <!-- Developer Foundations -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
                             <i class="fa-solid fa-terminal"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900">CCBP: Developer Foundations</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Developer Foundations</h4>
                     </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Issued: March 22, 2026</p>
-                    <p class="text-sm text-gray-600">Technologies: Git, Command Line</p>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: March 22, 2026</p>
+                    <p class="text-sm text-gray-500 font-medium">Git, Command Line, and GitHub fundamentals.</p>
                 </div>
 
-                <div class="p-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-blue-100 transition">
-                    <div class="flex items-center gap-4 mb-3">
-                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+                <!-- Python -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-brands fa-python"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Python Foundations</h4>
+                    </div>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Feb 10, 2026</p>
+                    <p class="text-sm text-gray-500 font-medium">Python programming and problem-solving basics.</p>
+                </div>
+
+                <!-- Introduction to Databases -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Introduction to DBs</h4>
+                    </div>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Jan 11, 2026</p>
+                    <p class="text-sm text-gray-500 font-medium">SQL and Relational Database Management Systems.</p>
+                </div>
+
+                <!-- Responsive Website -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Responsive Web Design</h4>
+                    </div>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Nov 18, 2025</p>
+                    <p class="text-sm text-gray-500 font-medium">Building layouts with Bootstrap and Flexbox.</p>
+                </div>
+
+                <!-- Static Website -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Static Website</h4>
+                    </div>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Nov 4, 2025</p>
+                    <p class="text-sm text-gray-500 font-medium">Foundational HTML, CSS, and Bootstrap concepts.</p>
+                </div>
+
+                <!-- CCNAv7 Networking -->
+                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
                             <i class="fa-solid fa-network-wired"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900">CCNAv7: Networking</h4>
+                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCNAv7: Networking</h4>
                     </div>
-                    <p class="text-xs text-blue-600 font-medium mb-2">Cisco Networking Academy</p>
-                    <p class="text-sm text-gray-600">Introduction to networks course completion and Switching, Routing, and Wireless Essentials course.</p>
+                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-2">Cisco Networking Academy</p>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed">Introduction to Networks & Wireless Essentials.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-10">Achievements</h2>
-            
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
-                    <div class="text-yellow-500 mt-1"><i class="fa-solid fa-trophy"></i></div>
-                    <div>
-                        <p class="text-gray-900 font-medium">Earned a certification for completing CCNA Introduction to networks course</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
-                    <div class="text-yellow-500 mt-1"><i class="fa-solid fa-trophy"></i></div>
-                    <div>
-                        <p class="text-gray-900 font-medium">Earned a certification for completing CCNA Switching, Routing, and Wireless Essentials course</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border border-gray-100 shadow-sm">
-                    <div class="text-yellow-500 mt-1"><i class="fa-solid fa-trophy"></i></div>
-                    <div>
-                        <p class="text-gray-900 font-medium">Earned a certification in PCB DESIGN workshop in association with MSR technologies</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Soft Skills & Languages (Moved Here) -->
-    <section id="soft-skills" class="py-20 border-t border-gray-100">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Soft Skills -->
-                <div>
-                    <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-6">Soft Skills</h2>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-white border border-gray-100 rounded-lg text-sm font-medium text-gray-700 shadow-sm flex items-center gap-2">
-                            <i class="fa-solid fa-bullhorn text-blue-500 text-xs"></i> Communication & Leadership
-                        </span>
-                        <span class="px-4 py-2 bg-white border border-gray-100 rounded-lg text-sm font-medium text-gray-700 shadow-sm flex items-center gap-2">
-                            <i class="fa-solid fa-users-gear text-blue-500 text-xs"></i> Time Management & Teamwork
-                        </span>
-                        <span class="px-4 py-2 bg-white border border-gray-100 rounded-lg text-sm font-medium text-gray-700 shadow-sm flex items-center gap-2">
-                            <i class="fa-solid fa-brain text-blue-500 text-xs"></i> Critical Thinking & Problem Solving
-                        </span>
-                    </div>
-                </div>
-                <!-- Languages -->
-                <div>
-                    <h2 class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-6">Languages Known</h2>
-                    <div class="space-y-4">
-                                                <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-gray-900">English</span>
-                            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Professional</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-gray-900">Telugu</span>
-                            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Native</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-gray-900">Hindi</span>
-                            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Conversational</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Declaration Section -->
-    <section id="declaration" class="py-20 bg-gray-50/50 border-t border-gray-100">
+    <!-- Footer -->
+    <footer id="contact" class="py-20 border-t border-gray-100 bg-white">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="inline-block p-8 bg-white rounded-2xl border border-dashed border-gray-200 max-w-2xl shadow-sm">
-                <i class="fa-solid fa-signature text-blue-600 text-3xl mb-4 opacity-50"></i>
-                <h2 class="text-sm uppercase tracking-widest font-bold text-gray-400 mb-4">Self Declaration</h2>
-                <p class="text-gray-600 italic leading-relaxed">
-                    "I sincerely declare that the information in the resume is true to the best of my knowledge and belief."
-                </p>
-                <div class="mt-8 pt-8 border-t border-gray-100">
-                    <p class="font-bold text-gray-900">Jakkani Rishikesh</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-24 border-t border-gray-100 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-2xl font-bold mb-8 text-gray-900 tracking-tight">Get in Touch</h2>
-            <div class="flex flex-wrap justify-center gap-10 mb-12">
-                <button onclick="handleEmailClick()" class="text-gray-600 hover:text-blue-600 transition flex items-center gap-2 font-medium">
-                    <i class="fa-solid fa-envelope"></i> rishikeshjakkani123@gmail.com
+            <h2 class="text-3xl font-black text-gray-900 mb-10 tracking-tighter">Let's Connect</h2>
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 md:gap-12 mb-16">
+                <button onclick="handleEmailClick()" class="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors font-bold text-sm md:text-base">
+                    <i class="fa-solid fa-envelope text-xl"></i> rishikeshjakkani123@gmail.com
                 </button>
-                <a href="tel:+916303533064" class="text-gray-600 hover:text-blue-600 transition flex items-center gap-2 font-medium">
-                    <i class="fa-solid fa-phone"></i> +91 6303533064
+                <a href="tel:+916303533064" class="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors font-bold text-sm md:text-base">
+                    <i class="fa-solid fa-phone text-xl"></i> +91 6303533064
                 </a>
             </div>
-            <div class="flex justify-center gap-6 mb-12">
-                <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition text-xl">
-                    <i class="fa-brands fa-linkedin"></i>
+            
+            <div class="flex justify-center gap-5 mb-16">
+                <a href="https://github.com/Rishij4" target="_blank" class="w-14 h-14 bg-gray-50 flex items-center justify-center rounded-2xl hover:bg-gray-900 hover:text-white transition-all transform hover:-translate-y-1 shadow-sm" aria-label="GitHub">
+                    <i class="fa-brands fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="w-14 h-14 bg-gray-50 flex items-center justify-center rounded-2xl hover:bg-blue-600 hover:text-white transition-all transform hover:-translate-y-1 shadow-sm" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin text-2xl"></i>
                 </a>
             </div>
-            </p>
-            <p class="text-xs text-dark-300">
-                &copy; 2024 Jakkani Rishikesh. Professional Portfolio.
-            </p>
+
+            <p class="text-xs text-gray-400 mb-6 italic px-4 max-w-lg mx-auto leading-relaxed">"I sincerely declare that the information provided is true to the best of my knowledge."</p>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-gray-300 font-black">&copy; 2026 Jakkani Rishikesh</p>
         </div>
     </footer>
-     <script>
+
+    <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('open');
+            const isOpen = menu.classList.contains('open');
             
-            if (menu.classList.contains('open')) {
-                icon.classList.replace('fa-bars', 'fa-xmark');
-            } else {
-                icon.classList.replace('fa-xmark', 'fa-bars');
-            }
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars', isOpen);
+            icon.classList.toggle('fa-xmark', !isOpen);
         }
 
         function handleEmailClick() {
             const email = "rishikeshjakkani123@gmail.com";
-            const subject = encodeURIComponent("Inquiry from Portfolio");
-            const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
+            const subject = encodeURIComponent("Opportunity: Full Stack MERN Developer Role");
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
             
-            window.open(gmailComposeUrl, '_blank');
+            window.open(gmailUrl, '_blank');
             
-            const textArea = document.createElement("textarea");
-            textArea.value = email;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('Copy failed', err);
-            }
-            document.body.removeChild(textArea);
-        }
-
-        function showToast() {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = email;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            
             const toast = document.getElementById("toast");
             toast.className = "show";
             setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
         }
     </script>
-
 </body>
-
 </html>
