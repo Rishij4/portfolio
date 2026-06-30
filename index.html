@@ -1,486 +1,615 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jakkani Rishikesh | Full Stack MERN Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #1e293b; overflow-x: hidden; }
-        
-        #toast {
-            visibility: hidden;
-            min-width: 280px;
-            background-color: #1e293b;
-            color: #fff;
-            text-align: center;
-            border-radius: 12px;
-            padding: 16px;
-            position: fixed;
-            z-index: 100;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 30px;
-            font-size: 14px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-
-        #mobile-menu {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-        #mobile-menu.open {
-            max-height: 600px;
-            opacity: 1;
-            padding: 1.5rem 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Jakkani Rishikesh | Full Stack MERN Developer</title>
+  <meta name="description" content="Personal portfolio of Jakkani Rishikesh, a Full Stack MERN Developer specializing in MongoDB, Express, React, Node.js, and IoT solutions.">
+  <meta name="keywords" content="Jakkani Rishikesh, Rishikesh Jakkani, MERN Developer, Full Stack, React, Node.js, Express, MongoDB, Portfolio, Web Developer">
+  <meta name="author" content="Jakkani Rishikesh">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jakkani Rishikesh | Full Stack MERN Developer">
+  <meta property="og:description" content="Personal portfolio of Jakkani Rishikesh, showcasing featured MERN and IoT projects.">
+  <meta property="og:url" content="https://rishij4.github.io/portfolio/">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- JavaScript -->
+  <script src="script.js" defer></script>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="toast">Email copied! Opening Gmail...</div>
+  <!-- Background Ambient Glow Elements -->
+  <div class="glow-sphere glow-sphere-1"></div>
+  <div class="glow-sphere glow-sphere-2"></div>
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100 py-3 md:py-4">
-        <div class="max-w-4xl mx-auto px-5 flex justify-between items-center">
-            <div class="font-black text-2xl tracking-tighter text-blue-600">JR.</div>
-            
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex space-x-8 text-sm font-semibold text-gray-500">
-                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
-                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
-                <a href="#certifications" class="hover:text-blue-600 transition-colors">Certifications</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+  <!-- Navigation Bar -->
+  <nav id="navbar" class="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="logo">JR<span>.</span></a>
+      
+      <!-- Desktop Navigation Menu -->
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      
+      <!-- Actions (Theme Toggle & Mobile Hamburger) -->
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+          <i class="fa-solid fa-sun"></i>
+        </button>
+        
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
+
+  <!-- Hero Section -->
+  <header id="home" class="hero">
+    <div class="container hero-content">
+      <span class="hero-tagline">Full Stack MERN Developer</span>
+      <h1 class="hero-title">Jakkani Rishikesh</h1>
+      <div class="hero-subtitle">
+        I am a <span id="typed-text"></span><span class="typed-cursor">|</span>
+      </div>
+      <p class="hero-description">
+        Passionate Full Stack Developer specialized in building scalable, user-centric web applications using the MERN stack (MongoDB, Express, React, Node.js) and integrating automated AI solutions.
+      </p>
+      
+      <div class="hero-cta">
+        <button onclick="handleEmailClick()" class="btn btn-primary" id="btn-hire">
+          <i class="fa-solid fa-envelope"></i> Hire Me
+        </button>
+        <a href="J_Rishikesh_Resume.pdf" download="J_Rishikesh_Resume.pdf" class="btn btn-secondary" id="btn-resume">
+          <i class="fa-solid fa-download"></i> Download Resume
+        </a>
+        <div class="social-links">
+          <a href="https://github.com/Rishij4" target="_blank" class="social-btn" aria-label="GitHub" id="social-github">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="social-btn" aria-label="LinkedIn" id="social-linkedin">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="section-subtitle">Career Objective</span>
+          <h2 class="section-main-title">About Me</h2>
+        </div>
+        
+        <div class="about-grid">
+          <p class="about-text">
+            Aspiring Full Stack Developer with a strong foundation in modern web architecture and problem-solving. Skilled in building responsive, full-featured web applications using the <span class="about-highlight">MERN stack</span>. Seeking an entry-level role to contribute to innovative software solutions while continuously scaling my technical capabilities.
+          </p>
+          
+          <div class="about-stats">
+            <div class="stat-card glass-card">
+              <div class="stat-number">3+</div>
+              <div class="stat-label">Projects</div>
             </div>
-
-            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 focus:outline-none" aria-label="Toggle Menu">
-                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="md:hidden px-6 bg-white flex flex-col space-y-2 text-base font-medium text-gray-600">
-            <a href="#about" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">About</a>
-            <a href="#skills" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Skills</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Projects</a>
-            <a href="#certifications" onclick="toggleMobileMenu()" class="py-3 border-b border-gray-50 hover:text-blue-600">Certifications</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="py-3 hover:text-blue-600">Contact</a>
-        </div>
-    </nav>
-
-    <!-- Header / Intro -->
-    <header id="home" class="py-16 md:py-32 overflow-hidden">
-        <div class="max-w-4xl mx-auto px-6">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight leading-[1.1]">Jakkani Rishikesh</h1>
-            
-            <div class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-full mb-8 uppercase tracking-widest border border-blue-100">
-                Full Stack MERN Developer
+            <div class="stat-card glass-card">
+              <div class="stat-number">1</div>
+              <div class="stat-label">Internship</div>
             </div>
-
-            <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl font-medium">
-                Passionate Full Stack Developer specialized in building scalable, user-centric web applications using the <span class="text-gray-900 font-bold">MERN stack</span> (MongoDB, Express, React, Node.js).
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <button onclick="handleEmailClick()" class="flex-1 sm:flex-none bg-gray-900 text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-800 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-gray-200">
-                    <i class="fa-solid fa-envelope"></i> Hire Me
-                </button>
-                <div class="flex gap-3 w-full sm:w-auto">
-                    <a href="https://github.com/Rishij4" target="_blank" class="flex-1 sm:flex-none border border-gray-200 text-gray-700 px-6 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-github text-lg"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="flex-1 sm:flex-none border border-gray-200 text-gray-700 px-6 py-3.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-linkedin text-lg"></i>
-                    </a>
-                </div>
+            <div class="stat-card glass-card" style="grid-column: span 2;">
+              <div class="stat-number">8</div>
+              <div class="stat-label">Certifications</div>
             </div>
+          </div>
         </div>
-    </header>
-
-    <!-- Career Objective -->
-    <section id="about" class="py-16 md:py-24 border-t border-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-6">Career Objective</h2>
-            <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl font-medium">
-                Aspiring Full Stack Developer with a strong foundation in modern web architecture and problem-solving. Skilled in building responsive, full-featured web applications using the MERN stack. Seeking an entry-level role to contribute to innovative software solutions while continuously scaling my technical capabilities.
-            </p>
-        </div>
+      </div>
     </section>
 
-    <!-- Technical Skills Grid -->
-    <section id="skills" class="py-16 md:py-24 bg-gray-50/50">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12 text-center">Technical Skills</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Frontend -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
-                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
-                        <i class="fa-solid fa-code text-blue-500"></i> Frontend
-                    </h3>
-                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
-                        <li class="flex justify-between items-center"><span>React.js</span> <i class="fa-brands fa-react text-blue-400 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Tailwind CSS</span> <i class="fa-solid fa-wind text-cyan-400 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>JavaScript (ES6+)</span> <i class="fa-brands fa-js text-yellow-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>HTML5 / CSS3</span> <i class="fa-brands fa-html5 text-orange-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Bootstrap</span> <i class="fa-brands fa-bootstrap text-purple-600 text-base"></i></li>
-                    </ul>
-                </div>
-                <!-- Backend -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
-                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
-                        <i class="fa-solid fa-server text-blue-500"></i> Backend & DB
-                    </h3>
-                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
-                        <li class="flex justify-between items-center"><span>Node.js</span> <i class="fa-brands fa-node-js text-green-600 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Express.js</span> <i class="fa-solid fa-bolt text-gray-800 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>MongoDB</span> <i class="fa-solid fa-leaf text-green-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>SQL / MySQL</span> <i class="fa-solid fa-database text-blue-600 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Python</span> <i class="fa-brands fa-python text-blue-400 text-base"></i></li>
-                    </ul>
-                </div>
-                <!-- Tools -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:col-span-2 md:col-span-1">
-                    <h3 class="font-bold mb-6 text-gray-900 flex items-center gap-2">
-                        <i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> Tools & Others
-                    </h3>
-                    <ul class="space-y-4 text-sm text-gray-600 font-medium">
-                        <li class="flex justify-between items-center"><span>Git / GitHub</span> <i class="fa-brands fa-github text-gray-900 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>VS Code</span> <i class="fa-solid fa-terminal text-blue-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Postman</span> <i class="fa-solid fa-envelope-open-text text-orange-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>OpenCV</span> <i class="fa-solid fa-eye text-green-500 text-base"></i></li>
-                        <li class="flex justify-between items-center"><span>Arduino IDE</span> <i class="fa-solid fa-microchip text-teal-500 text-base"></i></li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="section-subtitle">Technical Skills</span>
+          <h2 class="section-main-title">What I Do</h2>
         </div>
+        
+        <div class="skills-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="frontend">Frontend</button>
+          <button class="tab-btn" data-filter="backend">Backend & DB</button>
+          <button class="tab-btn" data-filter="core">Programming & CS</button>
+          <button class="tab-btn" data-filter="tools">Tools</button>
+        </div>
+        
+        <div class="skills-grid">
+          <!-- Programming Languages -->
+          <div class="skill-card glass-card" data-category="core" id="skill-js">
+            <i class="fa-brands fa-js skill-icon" style="color: #f7df1e;"></i>
+            <span class="skill-name">JavaScript (ES6+)</span>
+          </div>
+          <div class="skill-card glass-card" data-category="core" id="skill-python">
+            <i class="fa-brands fa-python skill-icon" style="color: #3776ab;"></i>
+            <span class="skill-name">Python</span>
+          </div>
+
+          <!-- Frontend Skills -->
+          <div class="skill-card glass-card" data-category="frontend" id="skill-html">
+            <i class="fa-brands fa-html5 skill-icon" style="color: #e34f26;"></i>
+            <span class="skill-name">HTML5</span>
+          </div>
+          <div class="skill-card glass-card" data-category="frontend" id="skill-css">
+            <i class="fa-brands fa-css3-alt skill-icon" style="color: #1572b6;"></i>
+            <span class="skill-name">CSS3</span>
+          </div>
+          <div class="skill-card glass-card" data-category="frontend" id="skill-tailwind">
+            <i class="fa-solid fa-wind skill-icon" style="color: #38bdf8;"></i>
+            <span class="skill-name">Tailwind CSS</span>
+          </div>
+          <div class="skill-card glass-card" data-category="frontend" id="skill-react">
+            <i class="fa-brands fa-react skill-icon" style="color: #61dafb;"></i>
+            <span class="skill-name">React.js</span>
+          </div>
+          <div class="skill-card glass-card" data-category="frontend" id="skill-bootstrap">
+            <i class="fa-brands fa-bootstrap skill-icon" style="color: #7952b3;"></i>
+            <span class="skill-name">Bootstrap</span>
+          </div>
+
+          <!-- Backend & Database Skills -->
+          <div class="skill-card glass-card" data-category="backend" id="skill-node">
+            <i class="fa-brands fa-node-js skill-icon" style="color: #339933;"></i>
+            <span class="skill-name">Node.js</span>
+          </div>
+          <div class="skill-card glass-card" data-category="backend" id="skill-express">
+            <i class="fa-solid fa-bolt skill-icon" style="color: #f8fafc;"></i>
+            <span class="skill-name">Express.js</span>
+          </div>
+          <div class="skill-card glass-card" data-category="backend" id="skill-rest">
+            <i class="fa-solid fa-cloud skill-icon" style="color: #2563eb;"></i>
+            <span class="skill-name">REST APIs</span>
+          </div>
+          <div class="skill-card glass-card" data-category="backend" id="skill-mongodb">
+            <i class="fa-solid fa-leaf skill-icon" style="color: #47a248;"></i>
+            <span class="skill-name">MongoDB</span>
+          </div>
+          <div class="skill-card glass-card" data-category="backend" id="skill-sql">
+            <i class="fa-solid fa-database skill-icon" style="color: #00758f;"></i>
+            <span class="skill-name">SQL</span>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-card glass-card" data-category="tools" id="skill-git">
+            <i class="fa-brands fa-git-alt skill-icon" style="color: #f05032;"></i>
+            <span class="skill-name">Git</span>
+          </div>
+          <div class="skill-card glass-card" data-category="tools" id="skill-github">
+            <i class="fa-brands fa-github skill-icon"></i>
+            <span class="skill-name">GitHub</span>
+          </div>
+          <div class="skill-card glass-card" data-category="tools" id="skill-vscode">
+            <i class="fa-solid fa-code skill-icon" style="color: #007acc;"></i>
+            <span class="skill-name">VS Code</span>
+          </div>
+
+          <!-- Core CS -->
+          <div class="skill-card glass-card" data-category="core" id="skill-dsa">
+            <i class="fa-solid fa-diagram-project skill-icon" style="color: #ec4899;"></i>
+            <span class="skill-name">DSA</span>
+          </div>
+          <div class="skill-card glass-card" data-category="core" id="skill-oop">
+            <i class="fa-solid fa-cubes skill-icon" style="color: #6366f1;"></i>
+            <span class="skill-name">OOP</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-24">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12">Projects</h2>
-            
-            <div class="space-y-8 md:space-y-12">
-                <!-- 1. AI-Based Ticketing System -->
-                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl hover:shadow-blue-500/5">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">AI-Based Ticketing System</h3>
-                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Built an intelligent system for automatic ticket classification.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented issue prioritization using logic-based automation.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Designed a simple interface for tracking and managing tickets.</li>
-                    </ul>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-green-50 text-green-700 rounded-lg border border-green-100">Node.js</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Express.js</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">Logic Automation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Mobile Processor Hub -->
-                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Mobile Processor Hub (Web Application)</h3>
-                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a responsive web application with dynamic search and filtering.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented modern UI using Tailwind CSS with dark mode support.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Enhanced user experience with efficient data handling.</li>
-                    </ul>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">HTML5</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Facial Recognition System -->
-                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Facial Recognition System for Criminal Detection</h3>
-                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a real-time facial recognition system using Python and OpenCV.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented image preprocessing and feature extraction techniques.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Improved detection accuracy using optimized datasets.</li>
-                    </ul>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Python</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">OpenCV</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">AI Logic</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Robotic Bomb Detection System -->
-                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Robotic Bomb Detection System (IoT Project)</h3>
-                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Developed a robotic system for detecting hazardous objects using sensors and microcontroller.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented control logic using Arduino for real-time monitoring and navigation.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Integrated hardware and software components for remote operation.</li>
-                    </ul>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-teal-50 text-teal-700 rounded-lg border border-teal-100">Arduino</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">Sensors</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Embedded C</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Portfolio Website -->
-                <div class="group p-6 md:p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-blue-200 transition-all shadow-sm hover:shadow-xl">
-                    <h3 class="text-xl md:text-2xl font-bold text-blue-600 mb-4">Portfolio Website</h3>
-                    <ul class="text-gray-600 mb-8 leading-relaxed font-medium space-y-2">
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Designed and developed a fully responsive personal portfolio.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Optimized layout for mobile and desktop using Flexbox and Bootstrap.</li>
-                        <li class="flex gap-2"><span class="text-blue-500">•</span> Implemented modern UI/UX principles for professional branding.</li>
-                    </ul>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tools:</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">HTML/CSS</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-100">Bootstrap</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg border border-yellow-100">Flexbox</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="section-subtitle">Portfolio</span>
+          <h2 class="section-main-title">Featured Projects</h2>
         </div>
+        
+        <div class="projects-container">
+          <!-- 1. ForgeMobile -->
+          <div class="project-card glass-card" id="project-forgemobile">
+            <div class="project-meta">
+              <div class="project-header">
+                <h3 class="project-title">ForgeMobile</h3>
+                <p class="project-tech-subtitle">MERN Stack, React.js, MongoDB, Gemini AI</p>
+                <ul class="project-bullets">
+                  <li>Built a full-stack web platform for smartphone component customization and compatibility testing.</li>
+                  <li>Developed an AI-driven recommendation engine for performance, thermal, battery, and hardware compatibility analysis.</li>
+                  <li>Implemented JWT authentication, build saving, public sharing, dynamic pricing, and cloud database management.</li>
+                  <li>Created responsive UI with live build preview, guest mode, and PDF export functionality.</li>
+                </ul>
+                <div class="project-tags">
+                  <span class="tag">React.js</span>
+                  <span class="tag">MongoDB</span>
+                  <span class="tag">Gemini AI</span>
+                  <span class="tag">Node.js</span>
+                </div>
+              </div>
+              <div class="project-links">
+                <a href="https://forgemobile-frontend.onrender.com/" target="_blank" class="project-link" id="link-forgemobile-live">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Preview
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Mobile Processors Hub -->
+          <div class="project-card glass-card" id="project-processorhub">
+            <div class="project-meta">
+              <div class="project-header">
+                <h3 class="project-title">Mobile Processor Hub</h3>
+                <p class="project-tech-subtitle">React.js, Tailwind CSS, JavaScript</p>
+                <ul class="project-bullets">
+                  <li>Data & Interaction Analysis: Implemented interaction and query tracking mechanisms to analyze user behavior and optimize system performance.</li>
+                  <li>Efficient Data Handling: Structured complex relational dataset handling to ensure smooth, high-speed search execution and query processing.</li>
+                  <li>Responsive Architecture: Designed a fluid, cross-platform interface ensuring accessibility across different desktop and mobile operating environments.</li>
+                </ul>
+                <div class="project-tags">
+                  <span class="tag">React.js</span>
+                  <span class="tag">Tailwind CSS</span>
+                  <span class="tag">JavaScript</span>
+                </div>
+              </div>
+              <div class="project-links">
+                <a href="https://mobile-processor-hub.vercel.app/" target="_blank" class="project-link" id="link-processorhub-live">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Preview
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. AI Ticketing System -->
+          <div class="project-card glass-card" id="project-aiticketing">
+            <div class="project-meta">
+              <div class="project-header">
+                <h3 class="project-title">AI-Based Ticketing System</h3>
+                <p class="project-tech-subtitle">Python, FastAPI, SQLite, React.js</p>
+                <ul class="project-bullets">
+                  <li>Workflow Automation: Developed an intelligent help-desk ticket management system featuring automated ticket classification and issue prioritization based on logic-driven back-end automation.</li>
+                  <li>Support Diagnostics: Built a comprehensive data analytics dashboard to visualize ticket trends, real-time priorities, resolution statistics, and user account activities.</li>
+                  <li>Tracking & Status Operations: Implemented live real-time status tracking to improve ticket handling efficiency and minimize pipeline bottlenecks.</li>
+                </ul>
+                <div class="project-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">FastAPI</span>
+                  <span class="tag">SQLite</span>
+                  <span class="tag">React.js</span>
+                </div>
+              </div>
+              <div class="project-links">
+                <a href="https://ai-ticketing-frontend-5nvr.vercel.app/" target="_blank" class="project-link" id="link-aiticketing-live">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Preview
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Experience & Education -->
-    <section id="experience" class="py-16 md:py-24 bg-gray-50/50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <!-- Internship -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-8">Experience</h2>
-                    <div class="relative pl-8 border-l-2 border-blue-100">
-                        <div class="mb-10 relative">
-                            <div class="absolute -left-[41px] top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-white shadow-sm"></div>
-                            <h3 class="font-bold text-gray-900 text-lg">Web Development Intern</h3>
-                            <p class="text-sm text-blue-600 font-bold mb-1">Genz Educating Wing</p>
-                            <p class="text-[11px] text-gray-400 mb-4 font-bold uppercase tracking-wider">Nov 2024 — Jan 2025</p>
-                            <ul class="text-sm text-gray-600 space-y-3 font-medium">
-                                <li class="flex gap-2"><span class="text-blue-500">•</span> Developed responsive web applications including a portfolio and real estate platform.</li>
-                                <li class="flex gap-2"><span class="text-blue-500">•</span> Collaborated with team members in designing UI components.</li>
-                                <li class="flex gap-2"><span class="text-blue-500">•</span> Improved website performance and responsiveness.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-8">Education</h2>
-                    <div class="space-y-10">
-                        <div class="group">
-                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">B.Tech in ECE</h3>
-                            <p class="text-sm text-gray-600 font-medium">Sree Chaitanya College of Engineering</p>
-                            <div class="mt-2 flex items-center gap-3">
-                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2021 — 2025</span>
-                                <span class="text-[11px] font-bold text-gray-400">CGPA: 6.5</span>
-                            </div>
-                        </div>
-                        <div class="group">
-                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Intermediate (MPC)</h3>
-                            <p class="text-sm text-gray-600 font-medium">Alphores Junior College</p>
-                            <div class="mt-2 flex items-center gap-3">
-                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2019 — 2021</span>
-                                <span class="text-[11px] font-bold text-gray-400">Percentage: 65%</span>
-                            </div>
-                        </div>
-                        <div class="group">
-                            <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">SSC</h3>
-                            <p class="text-sm text-gray-600 font-medium">Siddhartha High School</p>
-                            <div class="mt-2 flex items-center gap-3">
-                                <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">2018 — 2019</span>
-                                <span class="text-[11px] font-bold text-gray-400">CGPA: 9.5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Experience & Education Section -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="section-subtitle">Timeline</span>
+          <h2 class="section-main-title">Experience & Education</h2>
         </div>
+        
+        <div class="timeline-section-grid">
+          <!-- Experience Column -->
+          <div>
+            <h3 class="timeline-title"><i class="fa-solid fa-briefcase"></i> Experience</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">Nov 2024 — Jan 2025</span>
+                <h4 class="timeline-role">Web Development Intern</h4>
+                <div class="timeline-org">Genz Educating Wing</div>
+                <div class="timeline-desc">
+                  <ul class="timeline-desc-list">
+                    <li>Developed responsive web applications including a portfolio and real estate platform.</li>
+                    <li>Collaborated with team members in designing UI components.</li>
+                    <li>Improved website performance and responsiveness.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Education Column -->
+          <div>
+            <h3 class="timeline-title"><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+            <div class="timeline">
+              <!-- B.Tech -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2021 — 2025</span>
+                <h4 class="timeline-role">B.Tech in ECE</h4>
+                <div class="timeline-org">Sree Chaitanya College of Engineering</div>
+                <div class="education-details">
+                  <span class="edu-badge">CGPA: 6.5</span>
+                </div>
+              </div>
+              <!-- Intermediate -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2019 — 2021</span>
+                <h4 class="timeline-role">Intermediate (MPC)</h4>
+                <div class="timeline-org">Alphores Junior College</div>
+                <div class="education-details">
+                  <span class="edu-badge">Percentage: 65%</span>
+                </div>
+              </div>
+              <!-- SSC -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2018 — 2019</span>
+                <h4 class="timeline-role">SSC</h4>
+                <div class="timeline-org">Siddhartha High School</div>
+                <div class="education-details">
+                  <span class="edu-badge">CGPA: 9.5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-16 md:py-24">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-600 mb-12 text-center">Certifications</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Node JS -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-brands fa-node-js"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Node.js Specialist</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: April 24, 2026</p>
-                    <p class="text-sm text-gray-500 font-medium">Node.js, Express, and Backend Development.</p>
-                </div>
-
-                <!-- Dynamic Web Application -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-gears"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Dynamic Web App</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: March 13, 2026</p>
-                    <p class="text-sm text-gray-500 font-medium">JavaScript Essentials and DOM Manipulation.</p>
-                </div>
-
-                <!-- Developer Foundations -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-terminal"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Developer Foundations</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: March 22, 2026</p>
-                    <p class="text-sm text-gray-500 font-medium">Git, Command Line, and GitHub fundamentals.</p>
-                </div>
-
-                <!-- Python -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-brands fa-python"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Python Foundations</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Feb 10, 2026</p>
-                    <p class="text-sm text-gray-500 font-medium">Python programming and problem-solving basics.</p>
-                </div>
-
-                <!-- Introduction to Databases -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Introduction to DBs</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Jan 11, 2026</p>
-                    <p class="text-sm text-gray-500 font-medium">SQL and Relational Database Management Systems.</p>
-                </div>
-
-                <!-- Responsive Website -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Responsive Web Design</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Nov 18, 2025</p>
-                    <p class="text-sm text-gray-500 font-medium">Building layouts with Bootstrap and Flexbox.</p>
-                </div>
-
-                <!-- Static Website -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCBP: Static Website</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-1">Issued: Nov 4, 2025</p>
-                    <p class="text-sm text-gray-500 font-medium">Foundational HTML, CSS, and Bootstrap concepts.</p>
-                </div>
-
-                <!-- CCNAv7 Networking -->
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-blue-100 transition group">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
-                            <i class="fa-solid fa-network-wired"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">CCNAv7: Networking</h4>
-                    </div>
-                    <p class="text-[10px] text-blue-600 font-black uppercase tracking-wider mb-2">Cisco Networking Academy</p>
-                    <p class="text-sm text-gray-500 font-medium leading-relaxed">Introduction to Networks & Wireless Essentials.</p>
-                </div>
-            </div>
+    <section id="certifications" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span class="section-subtitle">Credentials</span>
+          <h2 class="section-main-title">Certifications & Training</h2>
         </div>
+        
+        <div class="certs-grid">
+          <!-- Cert: React JS -->
+          <div class="cert-card glass-card" id="cert-reactjs">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-brands fa-react" style="color: #61dafb;"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">React JS</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: May 27, 2026</div>
+            <p class="cert-desc">Component architecture, hooks, state management, and SPA development.</p>
+            <a href="https://certificates.ccbp.in/intensive/react-js?id=SVMNKCQTEE" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert 1 -->
+          <div class="cert-card glass-card" id="cert-node">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-brands fa-node-js"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Node JS</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: April 24, 2026</div>
+            <p class="cert-desc">Node.js, Express, and Backend Development.</p>
+            <a href="https://certificates.ccbp.in/intensive/node-js?id=SLNQZBFOLE" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert: Responsive Web Design Using Flexbox -->
+          <div class="cert-card glass-card" id="cert-flexbox">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Responsive Web Design Using Flexbox</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: April 12, 2026</div>
+            <p class="cert-desc">Modern responsive layout design using CSS Flexbox container alignments.</p>
+            <a href="https://certificates.ccbp.in/intensive/flexbox?id=YIUXXXXLDA" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert: JavaScript Essentials -->
+          <div class="cert-card glass-card" id="cert-js-essentials">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-brands fa-js" style="color: #f7df1e;"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">JavaScript Essentials</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: April 11, 2026</div>
+            <p class="cert-desc">JavaScript variables, control flow, functions, loops, and array methods.</p>
+            <a href="https://certificates.ccbp.in/intensive/javascript-essentials?id=CFGVYFWYFI" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert: Developer Foundations -->
+          <div class="cert-card glass-card" id="cert-foundations">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-terminal"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Developer Foundations</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: March 22, 2026</div>
+            <p class="cert-desc">Git, Command Line, and GitHub fundamentals.</p>
+            <a href="https://certificates.ccbp.in/intensive/developer-foundations?id=CUXIYXOTEX" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert: Build Your Own Dynamic Web Application -->
+          <div class="cert-card glass-card" id="cert-dynamic">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-gears"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Build Your Own Dynamic Web Application</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: March 13, 2026</div>
+            <p class="cert-desc">JavaScript Essentials and DOM Manipulation.</p>
+            <a href="https://certificates.ccbp.in/intensive/dynamic-web-application?id=NQPJEZRVEF" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert 4: Programming Foundations with Python -->
+          <div class="cert-card glass-card" id="cert-python">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-brands fa-python"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Programming Foundations with Python</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: Feb 10, 2026</div>
+            <p class="cert-desc">Python programming and problem-solving basics.</p>
+            <a href="https://certificates.ccbp.in/intensive/programming-foundations?id=OQFEVONYKM" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert 5: Introduction to Databases -->
+          <div class="cert-card glass-card" id="cert-db">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-database"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Introduction to Databases</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: Jan 11, 2026</div>
+            <p class="cert-desc">SQL and Relational Database Management Systems.</p>
+            <a href="https://certificates.ccbp.in/intensive/introduction-to-databases?id=OLOIWITVQZ" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert 6: Build Your Own Responsive Website -->
+          <div class="cert-card glass-card" id="cert-responsive">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Build Your Own Responsive Website</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: Nov 18, 2025</div>
+            <p class="cert-desc">Building layouts with Bootstrap and Flexbox.</p>
+            <a href="https://certificates.ccbp.in/intensive/responsive-website?id=JBFXLLXVNX" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+
+          <!-- Cert 7 -->
+          <div class="cert-card glass-card" id="cert-static">
+            <div class="cert-header">
+              <div class="cert-icon-container">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div>
+                <h4 class="cert-title">Static Website</h4>
+                <div class="cert-issuer">CCBP</div>
+              </div>
+            </div>
+            <div class="cert-date">Issued: Nov 4, 2025</div>
+            <p class="cert-desc">Foundational HTML, CSS, and Bootstrap concepts.</p>
+            <a href="https://certificates.ccbp.in/intensive/static-website?id=XXGKSZPLZY" target="_blank" class="project-link" style="margin-top: 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Certificate
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer id="contact" class="py-20 border-t border-gray-100 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-black text-gray-900 mb-10 tracking-tighter">Let's Connect</h2>
-            <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 md:gap-12 mb-16">
-                <button onclick="handleEmailClick()" class="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors font-bold text-sm md:text-base">
-                    <i class="fa-solid fa-envelope text-xl"></i> rishikeshjakkani123@gmail.com
-                </button>
-                <a href="tel:+916303533064" class="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors font-bold text-sm md:text-base">
-                    <i class="fa-solid fa-phone text-xl"></i> +91 6303533064
-                </a>
-            </div>
-            
-            <div class="flex justify-center gap-5 mb-16">
-                <a href="https://github.com/Rishij4" target="_blank" class="w-14 h-14 bg-gray-50 flex items-center justify-center rounded-2xl hover:bg-gray-900 hover:text-white transition-all transform hover:-translate-y-1 shadow-sm" aria-label="GitHub">
-                    <i class="fa-brands fa-github text-2xl"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="w-14 h-14 bg-gray-50 flex items-center justify-center rounded-2xl hover:bg-blue-600 hover:text-white transition-all transform hover:-translate-y-1 shadow-sm" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin text-2xl"></i>
-                </a>
-            </div>
+  <!-- Footer Section & Contact -->
+  <footer id="contact" class="footer">
+    <div class="container">
+      <h2 class="footer-title">Let's Connect</h2>
+      
+      <div class="footer-email-container">
+        <button onclick="handleEmailClick()" class="email-btn" id="footer-btn-email">
+          <i class="fa-solid fa-envelope"></i> rishikeshjakkani123@gmail.com
+        </button>
+      </div>
+      
+      <div class="footer-social">
+        <a href="https://github.com/Rishij4" target="_blank" class="social-btn" aria-label="GitHub" id="footer-social-github">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rishikesh-jakkani-078161266" target="_blank" class="social-btn" aria-label="LinkedIn" id="footer-social-linkedin">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="tel:+916303533064" class="social-btn" aria-label="Call Mobile" id="footer-social-phone">
+          <i class="fa-solid fa-phone"></i>
+        </a>
+      </div>
 
-            <p class="text-xs text-gray-400 mb-6 italic px-4 max-w-lg mx-auto leading-relaxed">"I sincerely declare that the information provided is true to the best of my knowledge."</p>
-            <p class="text-[10px] uppercase tracking-[0.3em] text-gray-300 font-black">&copy; 2026 Jakkani Rishikesh</p>
-        </div>
-    </footer>
+      <p class="footer-declare">"I sincerely declare that the information provided is true to the best of my knowledge."</p>
+      <p class="footer-copyright">&copy; 2026 Jakkani Rishikesh</p>
+    </div>
+  </footer>
 
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            const isOpen = menu.classList.contains('open');
-            
-            menu.classList.toggle('open');
-            icon.classList.toggle('fa-bars', isOpen);
-            icon.classList.toggle('fa-xmark', !isOpen);
-        }
+  <!-- Toast Notification Elements (Controlled via JS) -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span class="toast-message">Email address copied to clipboard!</span>
+  </div>
 
-        function handleEmailClick() {
-            const email = "rishikeshjakkani123@gmail.com";
-            const subject = encodeURIComponent("Opportunity: Full Stack MERN Developer Role");
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
-            
-            window.open(gmailUrl, '_blank');
-            
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = email;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-            
-            const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-    </script>
 </body>
 </html>
