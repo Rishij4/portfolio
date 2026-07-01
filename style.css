@@ -975,6 +975,12 @@ button {
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 900px) {
   .hero-title {
     font-size: 3rem;
