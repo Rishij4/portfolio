@@ -361,7 +361,7 @@ button {
   font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-  height: 2.25rem; /* Prevents layout shifting during typing anim */
+  min-height: 2.25rem; /* Patched layout displacement during animation */
 }
 
 .hero-description {
@@ -730,7 +730,7 @@ button {
 
 .timeline-dot {
   position: absolute;
-  left: -2.35rem; /* Centered over the line */
+  left: -2.35rem; /* Centered over line */
   top: 0.35rem;
   width: 10px;
   height: 10px;
@@ -974,7 +974,10 @@ button {
   pointer-events: auto;
 }
 
-/* Responsive Styles */
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (FLUID LAYOUT CONTROL)
+   ========================================================================== */
+
 @media (max-width: 1024px) {
   .nav-menu {
     gap: 1rem;
@@ -1029,7 +1032,7 @@ button {
   }
   .hero-subtitle {
     font-size: 1.25rem;
-    height: 3.5rem; /* Allow wrap on smaller screens */
+    min-height: 3.5rem; /* Flexible multi-line room for text wrapping */
   }
   .email-btn {
     font-size: 1.15rem;
@@ -1045,8 +1048,13 @@ button {
   }
   .hero-cta {
     flex-direction: column;
+    width: 100%;
   }
-  .btn, .social-links {
+  .btn {
+    width: 100%;
+    justify-content: center; /* Center typography inside expanded buttons */
+  }
+  .social-links {
     width: 100%;
   }
   .social-btn {
@@ -1055,11 +1063,19 @@ button {
   .about-stats {
     grid-template-columns: 1fr;
   }
+  /* Formats inline double-span stats onto single grid column rows natively */
+  .stat-card[style*="grid-column"] {
+    grid-column: span 1 !important;
+  }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .project-card {
-    padding: 1.5rem;
+    padding: 1.25rem; /* Extra padding rescue for smaller viewports */
+  }
+  .project-bullets {
+    margin-left: 1rem;
+    font-size: 0.9rem;
   }
   .timeline-org {
     margin-bottom: 0.5rem;
