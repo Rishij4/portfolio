@@ -83,7 +83,7 @@ function initTypingEffect() {
 
   const roles = [
     'Full Stack MERN Developer',
-    'ECE Graduate & Tech Enthusiast',
+    'Tech Enthusiast',
     'Problem Solver'
   ];
   
@@ -96,7 +96,7 @@ function initTypingEffect() {
     const currentRole = roles[roleIndex];
     
     if (isDeleting) {
-charIndex--;
+      charIndex--;
       typingSpeed = 50; // Deletes faster than types
     } else {
       charIndex++;
@@ -128,6 +128,8 @@ function initActiveNavHighlight() {
   const sections = document.querySelectorAll('section, header');
   const navLinks = document.querySelectorAll('.nav-link');
   const navbar = document.getElementById('navbar');
+
+  if (!navbar) return;
 
   // Shrink navbar on scroll
   window.addEventListener('scroll', () => {
@@ -181,7 +183,10 @@ function initSkillsFilter() {
 
       // Toggle skill card visibility with scale transitions
       skillCards.forEach(card => {
-        const categories = card.getAttribute('data-category').split(' ');
+        const categoryData = card.getAttribute('data-category');
+        if (!categoryData) return;
+        
+        const categories = categoryData.split(' ');
         if (filterValue === 'all' || categories.includes(filterValue)) {
           card.classList.remove('hidden');
           card.style.opacity = '0';
@@ -199,7 +204,7 @@ function initSkillsFilter() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Collapsible Timeline Details (Optional Micro-interaction)
+   6. Collapsible Timeline Details (Micro-interactions)
    -------------------------------------------------------------------------- */
 function initTimelineToggles() {
   const timelineItems = document.querySelectorAll('.timeline-item');
@@ -222,26 +227,43 @@ function initTimelineToggles() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Email copy & Custom toast handler
+   7. Email Copy & Custom Toast Handler
    -------------------------------------------------------------------------- */
 function handleEmailClick() {
   const email = "rishikeshjakkani123@gmail.com";
   const subject = encodeURIComponent("Opportunity: Full Stack MERN Developer Role");
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
   
-  // Open Gmail compose link
+  // Open Gmail compose link in a new window
   window.open(gmailUrl, '_blank');
   
-  // Copy to clipboard
+  // Fallback to safe Clipboard API writing execution
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        showToast("Email address copied to clipboard!");
+      })
+      .catch(err => {
+        console.error("Clipboard API failure, trying fallback method", err);
+        fallbackCopyText(email);
+      });
+  } else {
+    fallbackCopyText(email);
+  }
+}
+
+// Fallback method for older browsers or rigid mobile environments
+function fallbackCopyText(text) {
   const tempInput = document.createElement("textarea");
+  tempInput.value = text;
+  tempInput.style.position = "fixed";  // Avoid scrolling page down
   document.body.appendChild(tempInput);
-  tempInput.value = email;
   tempInput.select();
   try {
     document.execCommand("copy");
     showToast("Email address copied to clipboard!");
   } catch (err) {
-    console.error("Could not copy email", err);
+    console.error("Could not copy email via fallback method", err);
   }
   document.body.removeChild(tempInput);
 }
@@ -249,7 +271,7 @@ function handleEmailClick() {
 function showToast(message) {
   let toast = document.getElementById("toast");
   if (!toast) {
-    // Create dynamically if not in HTML
+    // Create dynamically if missing from HTML architecture
     toast = document.createElement("div");
     toast.id = "toast";
     toast.className = "toast";
@@ -273,5 +295,5 @@ function showToast(message) {
   }, 3500);
 }
 
-// Expose handleEmailClick globally for HTML button access
+// Expose handleEmailClick globally for HTML button access point triggers
 window.handleEmailClick = handleEmailClick;
