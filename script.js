@@ -83,7 +83,7 @@ function initTypingEffect() {
 
   const roles = [
     'Full Stack MERN Developer',
-    'Tech Enthusiast',
+    'ECE Graduate & Tech Enthusiast',
     'Problem Solver'
   ];
   
@@ -96,8 +96,8 @@ function initTypingEffect() {
     const currentRole = roles[roleIndex];
     
     if (isDeleting) {
-      charIndex--;
-      typingSpeed = 50; 
+charIndex--;
+      typingSpeed = 50; // Deletes faster than types
     } else {
       charIndex++;
       typingSpeed = 100;
@@ -106,17 +106,18 @@ function initTypingEffect() {
     element.textContent = currentRole.substring(0, charIndex);
 
     if (!isDeleting && charIndex === currentRole.length) {
-      typingSpeed = 2000; 
+      typingSpeed = 2000; // Pause at full word
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       roleIndex = (roleIndex + 1) % roles.length;
-      typingSpeed = 500; 
+      typingSpeed = 500; // Pause before typing next word
     }
 
     setTimeout(type, typingSpeed);
   }
 
+  // Start typing
   setTimeout(type, 1000);
 }
 
@@ -128,8 +129,7 @@ function initActiveNavHighlight() {
   const navLinks = document.querySelectorAll('.nav-link');
   const navbar = document.getElementById('navbar');
 
-  if (!navbar) return;
-
+  // Shrink navbar on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
@@ -138,9 +138,10 @@ function initActiveNavHighlight() {
     }
   });
 
+  // Highlight active section using IntersectionObserver
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -60% 0px', 
+    rootMargin: '-20% 0px -60% 0px', // Trigger when section occupies mid screen
     threshold: 0
   };
 
@@ -172,16 +173,15 @@ function initSkillsFilter() {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      // Toggle button active classes
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const filterValue = btn.getAttribute('data-filter');
 
+      // Toggle skill card visibility with scale transitions
       skillCards.forEach(card => {
-        const categoryData = card.getAttribute('data-category');
-        if (!categoryData) return;
-        
-        const categories = categoryData.split(' ');
+        const categories = card.getAttribute('data-category').split(' ');
         if (filterValue === 'all' || categories.includes(filterValue)) {
           card.classList.remove('hidden');
           card.style.opacity = '0';
@@ -199,7 +199,7 @@ function initSkillsFilter() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Collapsible Timeline Details (Micro-interactions)
+   6. Collapsible Timeline Details (Optional Micro-interaction)
    -------------------------------------------------------------------------- */
 function initTimelineToggles() {
   const timelineItems = document.querySelectorAll('.timeline-item');
@@ -222,40 +222,26 @@ function initTimelineToggles() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Email Copy & Custom Toast Handler
+   7. Email copy & Custom toast handler
    -------------------------------------------------------------------------- */
 function handleEmailClick() {
   const email = "rishikeshjakkani123@gmail.com";
   const subject = encodeURIComponent("Opportunity: Full Stack MERN Developer Role");
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
   
+  // Open Gmail compose link
   window.open(gmailUrl, '_blank');
   
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(email)
-      .then(() => {
-        showToast("Email address copied to clipboard!");
-      })
-      .catch(err => {
-        console.error("Clipboard API failure, trying fallback method", err);
-        fallbackCopyText(email);
-      });
-  } else {
-    fallbackCopyText(email);
-  }
-}
-
-function fallbackCopyText(text) {
+  // Copy to clipboard
   const tempInput = document.createElement("textarea");
-  tempInput.value = text;
-  tempInput.style.position = "fixed";  
   document.body.appendChild(tempInput);
+  tempInput.value = email;
   tempInput.select();
   try {
     document.execCommand("copy");
     showToast("Email address copied to clipboard!");
   } catch (err) {
-    console.error("Could not copy email via fallback method", err);
+    console.error("Could not copy email", err);
   }
   document.body.removeChild(tempInput);
 }
@@ -263,6 +249,7 @@ function fallbackCopyText(text) {
 function showToast(message) {
   let toast = document.getElementById("toast");
   if (!toast) {
+    // Create dynamically if not in HTML
     toast = document.createElement("div");
     toast.id = "toast";
     toast.className = "toast";
@@ -286,4 +273,5 @@ function showToast(message) {
   }, 3500);
 }
 
+// Expose handleEmailClick globally for HTML button access
 window.handleEmailClick = handleEmailClick;
