@@ -274,11 +274,11 @@ button {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-/* Action Buttons (Theme & Hamburger Grid Mapping) */
-.theme-toggle-btn, .mobile-menu-toggle {
+/* Theme Toggle Button */
+.theme-toggle-btn {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: var(--radius-md);
@@ -290,10 +290,9 @@ button {
   color: var(--text-primary);
   font-size: 1rem;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-fast);
 }
 
-.theme-toggle-btn:hover, .mobile-menu-toggle:hover {
+.theme-toggle-btn:hover {
   background: var(--accent-color);
   color: #fff;
   border-color: var(--accent-color);
@@ -313,8 +312,12 @@ button {
   display: block;
 }
 
+/* Mobile Menu Toggle */
 .mobile-menu-toggle {
-  display: none; /* Controlled adaptively by media query layouts */
+  display: none;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  padding: 0.5rem;
 }
 
 /* Hero Section */
@@ -358,7 +361,7 @@ button {
   font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-  min-height: 2.25rem;
+  height: 2.25rem; /* Prevents layout shifting during typing anim */
 }
 
 .hero-description {
@@ -506,10 +509,6 @@ button {
   color: var(--accent-color);
   line-height: 1;
   margin-bottom: 0.5rem;
-}
-
-.stat-card .stat-number {
-  font-family: 'Outfit', sans-serif;
 }
 
 .stat-label {
@@ -731,7 +730,7 @@ button {
 
 .timeline-dot {
   position: absolute;
-  left: -2.35rem;
+  left: -2.35rem; /* Centered over the line */
   top: 0.35rem;
   width: 10px;
   height: 10px;
@@ -862,6 +861,82 @@ button {
   margin-top: auto;
 }
 
+/* Main Featured Certificate Styling */
+.main-cert-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(var(--accent-rgb), 0.08) 100%);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem;
+}
+
+.main-cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .main-cert-badge {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.main-cert-title {
+  font-size: 1.5rem !important;
+  color: var(--text-primary);
+}
+
+.main-cert-icon {
+  background: rgba(217, 119, 6, 0.15) !important;
+  color: #d97706 !important;
+  font-size: 1.75rem !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+}
+
+[data-theme="dark"] .main-cert-icon {
+  color: #fbbf24 !important;
+  background: rgba(251, 191, 36, 0.2) !important;
+}
+
+.main-cert-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.cert-stat-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  background: var(--accent-light);
+  color: var(--accent-color);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.main-cert-link {
+  font-size: 0.9rem !important;
+  margin-top: 0.5rem;
+  color: var(--accent-color) !important;
+}
+
 /* Footer Section */
 .footer {
   padding: 6rem 0 3rem;
@@ -975,10 +1050,7 @@ button {
   pointer-events: auto;
 }
 
-/* ==========================================================================
-   RESPONSIVE MEDIA QUERIES (FLUID LAYOUT CONTROL)
-   ========================================================================== */
-
+/* Responsive Styles */
 @media (max-width: 1024px) {
   .nav-menu {
     gap: 1rem;
@@ -1003,22 +1075,69 @@ button {
   .section {
     padding: 4rem 0;
   }
-
-  .mobile-menu-toggle {
-    display: flex; /* Activate mobile trigger securely */
-  }
-
-  /* Structural stacking fix when mobile layout menu drawer is active */
-  .nav-menu.open ~ .nav-actions #mobile-menu-toggle {
-    border-color: var(--card-border);
-    background: var(--card-bg);
-    z-index: 101; 
-  }
-
-  /* Frame alignment corrections for mobile canvas drawers */
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 290px;
- 
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--card-border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6rem 2rem 2rem;
+    gap: 1.5rem;
+    transition: right var(--transition-normal);
+    z-index: 99;
+  }
+  .nav-menu.open {
+    right: 0;
+  }
+  .mobile-menu-toggle {
+    display: block;
+    z-index: 100;
+  }
+  .hero {
+    padding-top: 6rem;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    height: 3.5rem; /* Allow wrap on smaller screens */
+  }
+  .email-btn {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  .hero-cta {
+    flex-direction: column;
+  }
+  .btn, .social-links {
+    width: 100%;
+  }
+  .social-btn {
+    flex: 1;
+  }
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .project-card {
+    padding: 1.5rem;
+  }
+  .timeline-org {
+    margin-bottom: 0.5rem;
+  }
+}
